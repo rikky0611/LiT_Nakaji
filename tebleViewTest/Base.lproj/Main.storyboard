@@ -26,7 +26,7 @@
                                 <rect key="frame" x="20" y="143" width="59" height="59"/>
                                 <state key="normal" image="写真編集.png"/>
                                 <connections>
-                                    <action selector="openAlbum" destination="X5I-uj-PaJ" eventType="touchUpInside" id="rNd-c8-amD"/>
+                                    <action selector="selectButtonTapped:" destination="X5I-uj-PaJ" eventType="touchUpInside" id="N9y-ud-UmJ"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rld-t9-SDe">

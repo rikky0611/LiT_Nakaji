@@ -29,28 +29,42 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     }
     
-    @IBAction func openAlbum(){
-        //カメラロールが利用可能かチェック
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+    func precentPickerController(sourceType:UIImagePickerControllerSourceType){
+        if UIImagePickerController.isSourceTypeAvailable(sourceType){
             let picker = UIImagePickerController()
+            picker.sourceType = sourceType
             picker.delegate = self
-            picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            
-            //カメラを自由な形に開きたいとき(今回は正方形)
-            picker.allowsEditing = true
-            
-            //アプリ画面に戻る
-            self.presentViewController(picker, animated: true, completion: nil)
+            self.presentViewController(picker, animated:true, completion:nil)
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
-    {
-        mainImageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: NSDictionary!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        newImage = image
+        mainImageView.image = image
+    }
+    
+    @IBAction func selectButtonTapped(sender: UIButton){
+        //選択肢の上に表示するアラート
+        let alert = UIAlertController(title: "画像の取得先を選択",message: nil, preferredStyle: .ActionSheet)
+        //選択肢設定
+        let firstAction = UIAlertAction(title: "カメラ", style: .Default){
+            action in
+            self.precentPickerController(.Camera)
+        }
+        let secondAction = UIAlertAction(title: "アルバム", style: .Default){
+            action in
+            self.precentPickerController(.PhotoLibrary)
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .Default,handler : nil)
         
-        //撮った写真を最初の画像として記憶しておく
-        newImage = mainImageView.image
-        dismissViewControllerAnimated(true, completion: nil)  //アプリ画面へ戻る
+        //選択肢をアラートに登録
+        alert.addAction(firstAction)
+        alert.addAction(secondAction)
+        alert.addAction(cancelAction)
+        
+        //アラートを表示
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     //キーボードreturn時に閉じる
@@ -60,28 +74,21 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
 
     @IBAction func tasu() {
-        if textField.text != "" {
+        if textField.text != "" && newImage != nil {
             textField.placeholder = "タイトル"
             func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-                if (segue.identifier == "toResultVC") {
                     let VC: ViewController = segue.destinationViewController  as! ViewController
                     // SubViewController のselectedImgに選択された画像を設定する
                     VC.imgArray.append(newImage)
                     VC.myItems.append(newText)
-                }
-                
             }
 
         } else {
-            textField.placeholder = "タイトルを記入してください"
+            textField.placeholder = "タイトルと画像を選択してください。"
             
         }
-     
     }
 
-
-    
-    
     
     
 }
