@@ -12,13 +12,10 @@ import UIKit
 
 class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate {
     
-    
+    //TableViewを宣言
     @IBOutlet weak var myTableView: UITableView!
-
-    var getImage:UIImage!
-    var getText:String!
     
-    
+    //ResultViewControllerに渡すための変数
     var selectedText:String!
     var selectedImage:UIImage!
     
@@ -34,14 +31,11 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         
         // DataSourceの設定をする.
         myTableView.dataSource = self
-        
         // Delegateを設定する.
         myTableView.delegate = self
         
         // ナビゲーションバー設定->storyBoard上で
         //self.navigationItem.title = "title"
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,29 +87,16 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         selectedImage = UIImage(named:"\(imgArray[indexPath.row])")
         selectedText = "\(myItems[indexPath.row])"
         
+        //画像が選択されていれば遷移
         if selectedImage != nil {
             // resultViewController へ遷移するために Segue を呼び出す
             performSegueWithIdentifier("toResultVC",sender: nil)
         }
-        
     }
     
-    // Segue 準備
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "toResultVC") {
-            let resultVC: ResultViewController = segue.destinationViewController  as! ResultViewController
-            // SubViewController のselectedImgに選択された画像を設定する
-            resultVC.getImage = selectedImage
-            resultVC.getText = selectedText
-        }
-        
-    }
-
     
-    
-    // セルを追加or削除しようとした場合
+    // セルを削除しようとした場合
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
         
         // 削除のとき.
         if editingStyle == UITableViewCellEditingStyle.Delete {
@@ -128,12 +109,16 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    
-    // セルの並び替えを有効にする
-    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    // Segue 準備
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "toResultVC") {
+            let resultVC: ResultViewController = segue.destinationViewController  as! ResultViewController
+            // SubViewController のselectedImgに選択された画像を設定する
+            resultVC.getImage = selectedImage
+            resultVC.getText = selectedText
+        }
         
     }
-
 
 }
 
