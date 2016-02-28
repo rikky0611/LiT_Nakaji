@@ -20,7 +20,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     var selectedImage:UIImage!
     
     //テーブル用初期配列
-    var imgArray: [String] = ["1.png","1x.png"]
+    var imgArray: [UIImage] = []
     var myItems: [String] = ["プログラミングについて", "勉強のやり方について"]
     
     //NSUserDefaults取得
@@ -28,6 +28,13 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //画像初期設定
+        let img1 = UIImage(named: "1.png")
+        let img2 = UIImage(named: "1x.png")
+        
+        imgArray.append(img1!)
+        imgArray.append(img2!)
         
         // DataSourceの設定をする.
         myTableView.dataSource = self
@@ -75,7 +82,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         let cell:TableViewCell = tableView.dequeueReusableCellWithIdentifier("SampleCell", forIndexPath: indexPath) as! TableViewCell
         
         cell.cellLabel.text = "\(myItems[indexPath.row])"
-        cell.cellImageView.image = UIImage(named:"\(imgArray[indexPath.row])")
+        cell.cellImageView.image = imgArray[indexPath.row]
         cell.cellLabel.numberOfLines = 3
   
         return cell
