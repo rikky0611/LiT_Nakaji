@@ -19,22 +19,21 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     var selectedText:String!
     var selectedImage:UIImage!
     
+    //画像初期設定
+    let img1 = UIImage(named: "1.png")
+    let img2 = UIImage(named: "1x.png")
+
     //テーブル用初期配列
-    var imgArray: [UIImage] = []
+    var imgArray: [UIImage] = [UIImage(named: "1.png")!,UIImage(named: "1x.png")!]
     var myItems: [String] = ["プログラミングについて", "勉強のやり方について"]
     
     //NSUserDefaults取得
     let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //画像初期設定
-        let img1 = UIImage(named: "1.png")
-        let img2 = UIImage(named: "1x.png")
-        
-        imgArray.append(img1!)
-        imgArray.append(img2!)
         
         // DataSourceの設定をする.
         myTableView.dataSource = self
