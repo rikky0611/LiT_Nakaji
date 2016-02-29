@@ -91,7 +91,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     //タップされたセル感知：遷移への準備
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
         // [indexPath.row] から画像名を探し、UImage を設定
-        selectedImage = UIImage(named:"\(imgArray[indexPath.row])")
+        selectedImage = imgArray[indexPath.row]
         selectedText = "\(myItems[indexPath.row])"
         
         //画像が選択されていれば遷移
