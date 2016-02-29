@@ -78,7 +78,7 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         if textField.text != "" && newImage != nil {
             setAlert("保存しました")
         } else {
-            textField.placeholder = "タイトルと画像を選択してください。"
+            setAlert("タイトルと画像を選んでください")
         }
     }
 
@@ -89,6 +89,7 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             action in
             // ボタンが押された時の処理
             print ("pushed")
+            self.performSegueWithIdentifier("toHome", sender: self) //sender : nilだとダメ
         }))
         self.presentViewController(alert, animated: true, completion: {
             // 表示完了時の処理
@@ -99,6 +100,7 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let VC: ViewController = segue.destinationViewController  as! ViewController
         // SubViewController のselectedImgに選択された画像を設定する
+        newText = textField.text
         VC.imgArray.append(newImage)
         VC.myItems.append(newText)
     }

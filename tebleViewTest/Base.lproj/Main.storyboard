@@ -47,6 +47,7 @@
                     <connections>
                         <outlet property="mainImageView" destination="Rld-t9-SDe" id="PBi-7v-s2A"/>
                         <outlet property="textField" destination="EC3-5t-ByK" id="jfb-DK-E5U"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="toHome" id="Dva-Zs-7GR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K5O-Ir-6aH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -70,7 +71,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SampleCell" rowHeight="95" id="izD-H0-H1R" customClass="TableViewCell" customModule="tebleViewTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="95"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="izD-H0-H1R" id="aLV-hl-CDu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
@@ -102,7 +103,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="kRP-M2-DAr">
                             <connections>
                                 <action selector="addTapped:" destination="BYZ-38-t0r" id="0Ci-1Q-HzN"/>
-                                <segue destination="X5I-uj-PaJ" kind="push" id="gsI-CK-oMK"/>
+                                <segue destination="X5I-uj-PaJ" kind="push" identifier="" id="gsI-CK-oMK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="JsR-GK-9eH">
@@ -119,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1056.5" y="328.5"/>
+            <point key="canvasLocation" x="924.5" y="-307.5"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="qne-N5-OET">
@@ -301,4 +302,7 @@
         <image name="戻る.png" width="101" height="101"/>
         <image name="送信.png" width="91" height="46"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Dva-Zs-7GR"/>
+    </inferredMetricsTieBreakers>
 </document>
