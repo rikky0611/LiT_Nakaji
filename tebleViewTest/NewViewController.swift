@@ -9,10 +9,15 @@
 import UIKit
 
 class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    //AppDelegateのインスタンスを取得
+    let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     //新規保存用ImageView
     @IBOutlet weak var mainImageView: UIImageView!
     //新規保存用TextView
     @IBOutlet var textField: UITextField!
+    
     
     var newImage : UIImage!
     var newText : String!
@@ -22,12 +27,23 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("HomeViewControllerのviewDidAppearが呼ばれた")
+    }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("HomeViewControllerのviewWillDisappearが呼ばれた")
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
 
     }
+    
+    
     
     func precentPickerController(sourceType:UIImagePickerControllerSourceType){
         if UIImagePickerController.isSourceTypeAvailable(sourceType){
@@ -76,33 +92,31 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBAction func tasu() {
         print ("tasuが呼ばれた！")
         if textField.text != "" && newImage != nil {
-            setAlert("保存しました")
+            setAlert("保存しました",bool: true)
         } else {
-            setAlert("タイトルと画像を選んでください")
+            setAlert("タイトルと画像を選んでください",bool: false)
         }
     }
 
     //アラート設定
-    func setAlert(message:String){
+    func setAlert(message:String,bool:Bool){
         let alert:UIAlertController = UIAlertController(title: "タイトル", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
             action in
             // ボタンが押された時の処理
             print ("pushed")
-            self.performSegueWithIdentifier("toHome", sender: self) //sender : nilだとダメ
+            if bool {
+                self.newText = self.textField.text
+                self.appDelegate.imgArray.append(self.newImage)
+                self.appDelegate.myItems.append(self.newText)
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
+            
         }))
         self.presentViewController(alert, animated: true, completion: {
             // 表示完了時の処理
             print("finished")
         })
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        let VC: ViewController = segue.destinationViewController  as! ViewController
-        // SubViewController のselectedImgに選択された画像を設定する
-        newText = textField.text
-        VC.imgArray.append(newImage)
-        VC.myItems.append(newText)
     }
     
     

@@ -98,11 +98,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
             textField.placeholder = "文字を記入してください"
         }
         
-        
-        /////
-        
         selectedText2 = getTextmessage
-        
     }
     
     

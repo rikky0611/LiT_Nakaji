@@ -12,6 +12,9 @@ import UIKit
 
 class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate {
     
+    //AppDelegateのインスタンスを取得
+    let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     //TableViewを宣言
     @IBOutlet weak var myTableView: UITableView!
     
@@ -19,18 +22,9 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     var selectedText:String!
     var selectedImage:UIImage!
     
-    //画像初期設定
-    let img1 = UIImage(named: "1.png")
-    let img2 = UIImage(named: "1x.png")
-
     //テーブル用初期配列
-    var imgArray: [UIImage] = [UIImage(named: "1.png")!,UIImage(named: "1x.png")!]
-    var myItems: [String] = ["プログラミングについて", "勉強のやり方について"]
-    
-    //NSUserDefaults取得
-    let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-    
-    
+    var imgArray = [UIImage!]()
+    var myItems = [String!]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +38,26 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         //self.navigationItem.title = "title"
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("HomeViewControllerのviewDidAppearが呼ばれた")
+        imgArray = appDelegate.imgArray
+        myItems = appDelegate.myItems
+        myTableView.reloadData()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("HomeViewControllerのviewWillDisappearが呼ばれた")
+        appDelegate.imgArray = imgArray
+        appDelegate.myItems = myItems
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     //編集ボタンをタップされたとき
     @IBAction func editTapped(sender: AnyObject) {
