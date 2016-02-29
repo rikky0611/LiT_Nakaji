@@ -74,21 +74,34 @@ class NewViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
 
     @IBAction func tasu() {
+        print ("tasuが呼ばれた！")
         if textField.text != "" && newImage != nil {
-            textField.placeholder = "タイトル"
-            func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-                    let VC: ViewController = segue.destinationViewController  as! ViewController
-                    // SubViewController のselectedImgに選択された画像を設定する
-                    VC.imgArray.append(newImage)
-                    VC.myItems.append(newText)
-            }
-
+            setAlert("保存しました")
         } else {
             textField.placeholder = "タイトルと画像を選択してください。"
-            
         }
     }
 
+    //アラート設定
+    func setAlert(message:String){
+        let alert:UIAlertController = UIAlertController(title: "タイトル", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
+            action in
+            // ボタンが押された時の処理
+            print ("pushed")
+        }))
+        self.presentViewController(alert, animated: true, completion: {
+            // 表示完了時の処理
+            print("finished")
+        })
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        let VC: ViewController = segue.destinationViewController  as! ViewController
+        // SubViewController のselectedImgに選択された画像を設定する
+        VC.imgArray.append(newImage)
+        VC.myItems.append(newText)
+    }
     
     
 }
