@@ -37,8 +37,6 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         mainImageView.image = getImage
         // Do any additional setup after loading the view.
         
-        //nanna
-        
         myTableView.delegate = self
         myTableView.dataSource = self
         
@@ -58,7 +56,6 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     
     // セルの行数
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(my2ItemsArray.count)
         return my2ItemsArray.count
     }
     
@@ -104,7 +101,6 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
         return true
     }
     
