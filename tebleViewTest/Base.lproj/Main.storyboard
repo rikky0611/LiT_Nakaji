@@ -138,13 +138,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZV-Uv-E4i">
-                                <rect key="frame" x="0.0" y="62" width="375" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.89840230759999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u9v-aw-enP">
                                 <rect key="frame" x="0.0" y="100" width="375" height="161"/>
                                 <color key="backgroundColor" red="0.042487551370000001" green="0.94397277150000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -202,14 +195,21 @@
                                     <action selector="moji" destination="Fo2-wf-2fB" eventType="touchUpInside" id="snm-85-t6p"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZV-Uv-E4i">
+                                <rect key="frame" x="0.0" y="62" width="375" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.89840230759999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.53361369869999997" green="0.78582702019999995" blue="0.34292626809999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="label" destination="rZV-Uv-E4i" id="m2S-XQ-RuV"/>
                         <outlet property="mainImageView" destination="u9v-aw-enP" id="4dU-pq-x8z"/>
                         <outlet property="myTableView" destination="sLU-7d-Fsl" id="AEs-of-2AI"/>
                         <outlet property="textField" destination="xLU-Mb-YhK" id="UxV-Zl-NFa"/>
+                        <outlet property="titleLabel" destination="rZV-Uv-E4i" id="91i-Z3-hA7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPZ-ka-CBm" userLabel="First Responder" sceneMemberID="firstResponder"/>

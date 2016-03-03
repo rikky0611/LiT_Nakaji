@@ -10,42 +10,41 @@ import UIKit
 
 class ResultViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var label: UILabel!
+    //アウトレット接続パーツ
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var myTableView: UITableView!
-    var my2ItemsArray: [String] = []
-    
     @IBOutlet var textField: UITextField!
     
-    var selectedText2:String!
-    var selectedImage2:UIImage!
+    var my2ItemsArray: [String] = []
+    
+    var newText:String!
     
     let imgArray: NSArray = []
     
+    //ViewControllerから渡ってきた画像とタイトル
     var getImage:UIImage!
     var getText:String!
-    var getTextmessage:String!
-    
-    var originalimage : UIImage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-        label.text = getText
-    
-        mainImageView.image = getImage
-        // Do any additional setup after loading the view.
         
+        //タイトルと画像設定
+        titleLabel.text = getText
+        titleLabel.textColor = UIColor.blueColor()
+        mainImageView.image = getImage
+        
+        //tableView設定
         myTableView.delegate = self
         myTableView.dataSource = self
         
-        label.textColor = UIColor.blueColor()
-        
-        textField.delegate = self
-
+        //tableViewのセルの高さを動的に変更
         self.myTableView.estimatedRowHeight = 90
         self.myTableView.rowHeight = UITableViewAutomaticDimension
+        
+        //textField設定
+        textField.delegate = self
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,12 +69,8 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     
     //タップされたセル感知：遷移への準備
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        // [indexPath.row] から画像名を探し、UImage を設定
         
-        selectedImage2 = UIImage(named:"\(imgArray[indexPath.row])")
-        selectedText2 = "\(my2ItemsArray[indexPath.row])"
-        
-        if selectedImage2 != nil {
+        if newText != nil {
             // resultViewController へ遷移するために Segue を呼び出す
             performSegueWithIdentifier("toResultVC2",sender: nil)
         }
@@ -94,8 +89,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         } else {
             textField.placeholder = "文字を記入してください"
         }
-        
-        selectedText2 = getTextmessage
+        newText = getText
     }
     
     
@@ -112,13 +106,10 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         if (segue.identifier == "toResultVC2") {
             let resultVC2: NakamiViewController = segue.destinationViewController  as! NakamiViewController
             // SubViewController のselectedImgに選択された画像を設定する
-            resultVC2.getTextmessage = selectedText2
-            NSLog("\(selectedText2) was sent to Nakami" )
+            resultVC2.getTextmessage = newText
+            NSLog("\(newText) was sent to Nakami" )
         }
         
     }
 
-    
-    
-    
 }
