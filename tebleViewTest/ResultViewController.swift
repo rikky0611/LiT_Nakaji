@@ -22,9 +22,8 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     var topicDict : NSDictionary!   //[title : [topic],,,]
     var topicArray : [String] = []
     
+    //新しく追加するトピック
     var newText:String!
-    
-    let imgArray: NSArray = []
     
     //ViewControllerから渡ってきた画像とタイトル
     var getImage:UIImage!
@@ -52,8 +51,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         
         //appDelegateから取得
         topicDict = appDelegate.topicDict
-        NSLog("\(topicDict.count)が辞書に入っている！")
-        //topicArray = topicDict.
+        topicArray = appDelegate.topicDict[getText] as! [String]
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,8 +87,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     
     @IBAction func moji() {
         if textField.text != "" {
-            //self.myTableView.reloadData()
-            //topicDict.append(textField.text!)
+            topicArray.append(textField.text!)
             print("\(topicDict)")
             self.myTableView.reloadData()
             textField.text = ""
@@ -116,6 +113,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
             let resultVC2: NakamiViewController = segue.destinationViewController  as! NakamiViewController
             // SubViewController のselectedImgに選択された画像を設定する
             resultVC2.getTextmessage = newText
+            
             NSLog("\(newText) was sent to Nakami" )
         }
         
