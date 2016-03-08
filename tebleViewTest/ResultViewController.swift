@@ -10,13 +10,17 @@ import UIKit
 
 class ResultViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    //AppDelegateのインスタンスを取得
+    let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     //アウトレット接続パーツ
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet var textField: UITextField!
     
-    var my2ItemsArray: [String] = []
+    var topicDict : NSDictionary!   //[title : [topic],,,]
+    var topicArray : [String] = []
     
     var newText:String!
     
@@ -28,6 +32,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         //タイトルと画像設定
         titleLabel.text = getText
@@ -44,7 +49,11 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         
         //textField設定
         textField.delegate = self
-
+        
+        //appDelegateから取得
+        topicDict = appDelegate.topicDict
+        NSLog("\(topicDict.count)が辞書に入っている！")
+        //topicArray = topicDict.
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,7 +64,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     
     // セルの行数
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return my2ItemsArray.count
+        return topicDict.count
     }
     
     // セルの設定
@@ -63,7 +72,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
 
         let cell:TableViewCell2 = myTableView.dequeueReusableCellWithIdentifier("SampleCell2", forIndexPath: indexPath) as! TableViewCell2
         
-        cell.cellLabel.text = "\(my2ItemsArray[indexPath.row])"
+        cell.cellLabel.text = "\(topicDict[indexPath.row])"
         return cell
     }
     
@@ -81,8 +90,8 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     @IBAction func moji() {
         if textField.text != "" {
             //self.myTableView.reloadData()
-            my2ItemsArray.append(textField.text!)
-            print("\(my2ItemsArray)")
+            //topicDict.append(textField.text!)
+            print("\(topicDict)")
             self.myTableView.reloadData()
             textField.text = ""
             textField.placeholder = "メッセージ"
