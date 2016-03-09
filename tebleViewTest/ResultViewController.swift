@@ -114,7 +114,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         if (segue.identifier == "toResultVC2") {
             let resultVC2: NakamiViewController = segue.destinationViewController  as! NakamiViewController
             // SubViewController のselectedImgに選択された画像を設定する
-            resultVC2.getTextmessage = newText
+            resultVC2.getTextMessage = newText
             
             NSLog("\(newText) was sent to Nakami" )
         }

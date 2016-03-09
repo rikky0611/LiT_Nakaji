@@ -10,15 +10,16 @@ import UIKit
 
 class NakamiViewController: UIViewController {
     @IBOutlet var label:UILabel!
-    var getTextmessage:String!
+    var getTextMessage:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        label.text = getTextmessage
+        label.text = getTextMessage
         label.numberOfLines = 3
     }
+    
+    
     
     
     override func didReceiveMemoryWarning() {
