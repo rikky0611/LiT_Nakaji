@@ -51,7 +51,9 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         
         //appDelegateから取得
         topicDict = appDelegate.topicDict
-        topicArray = appDelegate.topicDict[getText] as! [String]
+        if let arr = appDelegate.topicDict[getText] {
+            topicArray = arr as! [String]
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,7 +64,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
     
     // セルの行数
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return topicDict.count
+        return topicArray.count
     }
     
     // セルの設定
@@ -70,7 +72,7 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
 
         let cell:TableViewCell2 = myTableView.dequeueReusableCellWithIdentifier("SampleCell2", forIndexPath: indexPath) as! TableViewCell2
         
-        cell.cellLabel.text = "\(topicDict[indexPath.row])"
+        cell.cellLabel.text = "\(topicArray[indexPath.row])"
         return cell
     }
     
