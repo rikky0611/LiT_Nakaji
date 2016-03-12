@@ -76,13 +76,13 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         return cell
     }
     
+    /*----------ここが呼ばれないバグ-------------*/
     //タップされたセル感知：遷移への準備
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
         
-        if newText != nil {
-            // resultViewController へ遷移するために Segue を呼び出す
-            performSegueWithIdentifier("toResultVC2",sender: nil)
-        }
+        newText = topicArray[indexPath.row]
+        // resultViewController へ遷移するために Segue を呼び出す
+        performSegueWithIdentifier("toResultVC2",sender: nil)
         
     }
     
@@ -97,7 +97,6 @@ class ResultViewController: UIViewController, UIImagePickerControllerDelegate , 
         } else {
             textField.placeholder = "文字を記入してください"
         }
-        newText = getText
     }
     
     
